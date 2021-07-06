@@ -1,0 +1,54 @@
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+
+pd.set_option("display.max_rows", None, "display.max_columns", None, "display.width", None) # pretty printing
+
+#1. import credit card data to df and skip the top row 
+df = pd.read_excel('https://archive.ics.uci.edu/ml/machine-learning-databases/00350/default%20of%20credit%20card%20clients.xls', skiprows=[0])
+df.shape
+#print(df.head(10))
+
+#Delete the 'ID" column after importing the data
+df.drop('ID', inplace=True, axis=1)
+#print(df.head(10))
+
+#2. Rename columns
+df = df.rename(columns = {'PAY_0':'PAY_1', 'default payment next month': 'payment_default'})
+#print(df.head(10))
+
+#3. Create one-dimensional numpy array y and 2-dimensional numpy array X
+y = df['payment_default'].loc[:249].values #.values is to transfer the value from payment_default to array y
+#print(y, len(y))
+
+colums_to_use_for_X = ['PAY_1', 'AGE', 'SEX', 'MARRIAGE', 'EDUCATION', 'BILL_AMT1']
+X = df[colums_to_use_for_X].loc[:249].values
+#print(X,len(X))
+
+#4. Splitting dtat into 70% train and 30% test datasets; random_state = 1 and stratify = y
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 1, stratify = y)
+
+# print('X train shape:', X_train.shape)
+# print('y train shape:', y.shape)
+# print('X test shape:', X_test.shape)
+# print('y test shape:', y_test.shape)
+# print(y_train)
+# #check to see train and test datasets have roughly equal proportion of target's class lables
+# #np.bincount() is to count unique value of y 
+# print(np.bincount(y_train))
+
+#5. standardize features from train and test datasets to mean 0 and variance 1 (train the scaler only on train data)
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+
+sc.fit(X_train)
+
+X_train_scaled = sc.transform(X_train)
+#print('means:', X_train.mean(axis=0), X_train_scaled.mean(axis=0))
+#print('sigmas', X_train.std(axis=0), X_train_scaled.std(axis=0))
+
+X_test_scaled = sc.transform(X_test)
+#print('means:', X_test.mean(axis=0), X_test_scaled.mean(axis=0))
+#print('sigmas', X_test.std(axis=0), X_test_scaled.std(axis=0))
+
+
