@@ -1,0 +1,52 @@
+#7. Compute prediction accuracy on train data 
+##1. Logistic Regression
+lr_accuracy_train = lr.score(X_train_scaled, y_train)
+
+##2. SVM - Linear
+svm_linear_accuracy_train = svm_linear.score(X_train_scaled, y_train)
+
+##3. SVM - RBF
+svm_rbf_accuracy_train = svm_rbf.score(X_train_scaled, y_train)
+
+##4. Decision Tree
+tree_accurary_train = tree.score(X_train, y_train)
+
+##5. Random Forest
+forest_accuracy_train = forest.score(X_train, y_train)
+
+##6. KNN
+knn_accuracy_train = knn.score(X_train_scaled, y_train)
+
+#8. Compute prediction accurary on test data
+##1. Logistic Regression
+lr_accuracy_test = lr.score(X_test_scaled, y_test)
+
+##2. SVM - Linear
+svm_linear_accuracy_test = svm_linear.score(X_test_scaled, y_test)
+
+##3. SVM - RBF
+svm_rbf_accuracy_test = svm_rbf.score(X_test_scaled, y_test)
+
+##4. Decision Tree
+tree_accurary_test = tree.score(X_test, y_test)
+
+##5. Random Forest
+forest_accuracy_test = forest.score(X_test, y_test)
+
+##6. KNN
+knn_accuracy_test = knn.score(X_test_scaled, y_test)
+
+# #----Testing: 
+# print(f'Accuracy for train LR = {lr_accuracy_train:.3f}')
+# print(f'Accuracy for train SVM linear = {svm_linear_accuracy_train:.3f}')
+# print(f'Accuracy for train SVM RBF = {svm_rbf_accuracy_train:.3f}')
+# print(f'Accuracy for train Decicion Tree = {tree_accurary_train:.3f}')
+# print(f'Accuracy for train Random Forest = {forest_accuracy_train:.3f}')
+# print(f'Accuracy for train KNN = {knn_accuracy_train:.3f}')
+# print('-------------------------')
+# print(f'Accuracy for test LR = {lr_accuracy_test:.3f}')
+# print(f'Accuracy for test SVM linear = {svm_linear_accuracy_test:.3f}')
+# print(f'Accuracy for test SVM RBF = {svm_rbf_accuracy_test:.3f}')
+# print(f'Accuracy for test Decision Tree = {tree_accurary_test:.3f}')
+# print(f'Accuracy for test Random Forest = {forest_accuracy_test:.3f}')
+# print(f'Accuracy for test KNN = {knn_accuracy_test:.3f}')
